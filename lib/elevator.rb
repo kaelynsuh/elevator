@@ -5,15 +5,21 @@ class Elevator
     @total_stops = 0
   end
 
-  def elevator_stops(a, b)
+  def elevator_stops(a, b, max_elevator_weight)
     if a.empty?
       return @total_stops      
     else
-      a.shift
-      b.shift
+      current_person_weight = a.shift
+      current_person_floor = b.shift
 
-      @total_stops += 1
-      elevator_stops(a, b)
+      if current_person_weight > max_elevator_weight
+        # dont incr
+      else
+        @total_stops += 1
+      end
+
     end
+    elevator_stops(a, b, max_elevator_weight)
   end
 end
+
