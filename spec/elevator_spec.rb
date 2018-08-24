@@ -31,7 +31,7 @@ RSpec.describe Elevator do
         expect(queue.total_stops).to eq(1)
       end
 
-      it 'doesnt take the person if current_person_weight exceeds the max_elevator_weight' do
+      it 'doesnt take the person if persons weight exceeds the max_elevator_weight' do
         queue.elevator_stops([250], [2], 200, 2)
 
         expect(queue.total_stops).to eq(0)
@@ -39,16 +39,22 @@ RSpec.describe Elevator do
     end
 
     context 'two people get on the elevator' do
-      it 'if people_cap is 2, returns total_stops of 1' do
+      it 'if people_cap is 2, returns total_stops of 2' do
         queue.elevator_stops([60, 80], [2, 3], 200, 2)
 
-        expect(queue.total_stops).to eq(1)        
+        expect(queue.total_stops).to eq(2)
       end
 
       it 'if 2 people exceed elevator_cap, they get put on separate elevators, with total_stops of 2' do
         queue.elevator_stops([180, 100], [2, 3], 200, 2)
 
         expect(queue.total_stops).to eq(2) 
+      end
+
+      it 'if 2 people get off the same floor, returns total_stops of 1' do
+        queue.elevator_stops([60, 80], [2, 2], 200, 2)
+
+        expect(queue.total_stops).to eq(1)
       end
     end
   end
