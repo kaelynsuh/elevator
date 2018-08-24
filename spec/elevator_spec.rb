@@ -15,6 +15,10 @@ RSpec.describe Elevator do
     it 'initializes current_weight to 0' do
       expect(queue.current_weight).to eq(0)
     end
+
+    it 'initializes floors to empty hash with 0 values' do
+      expect(queue.floors).to eq({})
+    end
   end
 
   describe '#elevator_stops' do
