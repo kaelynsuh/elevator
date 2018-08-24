@@ -15,18 +15,15 @@ class Elevator
       b.shift
     else
       floors = Hash.new(0)
-
       while (@current_people < people_cap && !a.empty? && @current_weight + a[0] <= elevator_cap)
-        current_person_weight = a.shift
-        current_person_floor = b.shift
         @current_people += 1
-        @current_weight += current_person_weight
-        floors[current_person_floor] += 1
-
+        @current_weight += a.shift
+        floors[b.shift] += 1
       end
+
       @current_people = 0
       @current_weight = 0
-      @total_stops += floors.count
+      @total_stops += floors.count + 1
     end
 
     elevator_stops(a, b, elevator_cap, people_cap)
